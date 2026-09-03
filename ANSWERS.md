@@ -149,5 +149,9 @@ Jaeger, Prometheus, Delta và MLflow trong evidence bundle.
 - Fast suite: `87 passed` trên source có SHA-256
   `61c9c67a1db1c648409ff6eb263ca7ca41564d67637470a346179ac398ef8585`.
 - Ruff, integration matrix, portability và manifest validation: đạt.
-- Docker journeys, load profile và vLLM GPU: `UNVERIFIED` trong môi trường không
-  có Docker/GPU; không tạo evidence giả.
+- Docker basic profile: đã xác minh topics, seed, Qdrant index, MLflow champion
+  và readiness `degraded` hợp lệ do thiếu vLLM.
+- Docker full profile: `PARTIAL`; Spark Connect từng bị OOM với Docker RAM
+  4.8 GiB và lần cuối Airflow chưa qua trạng thái `Waiting`.
+- J1–J5, load profile, Delta/Feast live evidence và vLLM GPU: `UNVERIFIED`;
+  không tạo evidence giả.

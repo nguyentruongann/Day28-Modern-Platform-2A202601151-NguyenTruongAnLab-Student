@@ -1,6 +1,7 @@
 # Submission — Day 28 Track 2
 
-Nộp repo nhóm và evidence; không nộp secret, `.env`, database, cache, weights hay `.lab28/`.
+Nộp repo cá nhân và evidence; không nộp secret, `.env`, database, cache, weights
+hay `.lab28/`.
 
 1. `integration-report.json` và output fast suite.
 2. 10 evidence files đúng tên trong integration matrix.
@@ -9,7 +10,7 @@ Nộp repo nhóm và evidence; không nộp secret, `.env`, database, cache, wei
 5. Failure/recovery record + no-data-loss proof.
 6. Load profile P50/P95/P99 và bottleneck analysis.
 7. Kubernetes/GitOps validation + drift/rollback evidence.
-8. `ANSWERS.md`: trade-offs, production gaps, contribution từng thành viên.
+8. `ANSWERS.md`: trade-offs, production gaps và phạm vi cá nhân phụ trách.
 
 ```text
 uv run ruff check .
@@ -22,3 +23,7 @@ uv run pytest integration-tests -m "not gpu and not langsmith" -q
 
 GPU/LangSmith là gate theo môi trường. Nếu lớp không cấp endpoint/credential, báo
 `UNVERIFIED` và dùng local evidence tương ứng; không giả lập. Xem [rubric](docs/rubric.md).
+
+Trạng thái cụ thể của lần chạy này nằm trong `SUBMISSION_INDEX.md` và
+`EVIDENCE_STATUS.md`. Full profile cùng J1–J5 chưa được đánh dấu đạt do giới hạn
+RAM Docker; các ảnh hiện có nằm trong `docs/submission-screenshots/`.

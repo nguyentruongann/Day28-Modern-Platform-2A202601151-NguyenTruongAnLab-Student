@@ -8,6 +8,6 @@ opentelemetry-exporter-otlp-proto-grpc==1.44.0
 opentelemetry-sdk==1.44.0
 prometheus-client==0.26.0
 pydantic==2.12.5
-pyspark==4.2.0
+pyspark-client==4.2.0
 qdrant-client==1.19.0
 zstandard==0.25.0

@@ -6,6 +6,18 @@ Load profile live: `UNVERIFIED` — cần API/Docker stack đang chạy. Không 
 P50/P95/P99 giả định vì kết quả phụ thuộc phần cứng, model, dataset, warm-up và
 degraded policy.
 
+## Tài nguyên đã đo trên máy chạy
+
+| Chỉ số | Giá trị quan sát |
+|---|---:|
+| RAM vật lý | 11.8 GiB |
+| RAM Docker nhìn thấy | 4.8 GiB |
+| Mức dùng RAM tại thời điểm chụp | khoảng 81% |
+| Kết quả full profile | Spark Connect từng bị OOM, exit code 137 |
+
+Ảnh: [10-host-memory-pressure.png](docs/submission-screenshots/10-host-memory-pressure.png).
+Số liệu này chỉ chứng minh bottleneck tài nguyên; không thay thế P50/P95/P99.
+
 ## Cấu hình đo bắt buộc
 
 ```text
@@ -25,6 +37,8 @@ Kafka lag và trạng thái vLLM cho từng lần chạy.
 
 ## Phân tích bottleneck
 
+- Quan sát thật: memory pressure là bottleneck đầu tiên; full integration chưa
+  đủ ổn định để đo throughput/latency có ý nghĩa.
 - Gateway: rate limit hoặc connection saturation tạo 429/queueing trước API.
 - API: sync I/O hoặc worker thiếu làm tăng request duration và saturation.
 - Kafka/Airflow: consumer lag tăng khi ingestion nhanh hơn tốc độ xử lý batch.

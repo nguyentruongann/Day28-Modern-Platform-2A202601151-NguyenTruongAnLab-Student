@@ -48,7 +48,7 @@ ml = [
 
 # NOTE — Feast, Spark and Airflow are deliberately NOT extras here.
 #
-# feast==0.66.0 caps prometheus-client<0.25, and pyspark/airflow each pull a
+# feast==0.66.0 caps prometheus-client<0.25, and pyspark-client/airflow each pull a
 # large, opinionated dependency tree. Putting them in this project's resolution
 # universe would drag the serving stack onto their constraints for no benefit,
 # because none of them are imported by lab28_platform: Spark writes Delta from

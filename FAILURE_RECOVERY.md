@@ -1,10 +1,43 @@
 # Failure and Recovery Record
 
-## Kịch bản
+## Sự cố đã quan sát thật — Spark Connect OOM
+
+### Dấu hiệu
+
+- Full profile không ổn định: khi Airflow healthy, `spark-connect` chuyển thành
+  `Exited (137)`.
+- Lệnh kiểm tra trả `OOMKilled=true ExitCode=137`.
+- Máy có 11.8 GiB RAM; Docker chỉ nhận 4.8 GiB; Task Manager ghi nhận khoảng
+  81% RAM đang sử dụng.
+
+Ảnh: [09-spark-oom-failure.png](docs/submission-screenshots/09-spark-oom-failure.png)
+và [10-host-memory-pressure.png](docs/submission-screenshots/10-host-memory-pressure.png).
+
+### Nguyên nhân
+
+Giới hạn RAM của Docker/WSL thấp hơn mức full profile cần. Đây là lỗi tài nguyên,
+không phải lỗi bốn hàm cốt lõi. Quá trình build ban đầu còn tải gói
+`pyspark==4.2.0` khoảng 450 MB dù Airflow chỉ dùng Spark Connect client.
+
+### Hành động khôi phục đã thực hiện
+
+1. Thay dependency Airflow bằng `pyspark-client==4.2.0`; image Airflow build
+   thành công.
+2. Khởi động lại full profile mà không xóa volume/state.
+3. Lần chạy cuối ghi nhận Spark Connect healthy, nhưng Airflow vẫn `Waiting`
+   sau 1422.6 giây; chưa đạt trạng thái full stack ổn định.
+
+### Kết luận no-data-loss
+
+Không dùng `down -v` và không chạy `lab28 reset --yes`, do đó không chủ động xóa
+state. Tuy nhiên chưa có Delta row count trước/sau hoặc J2 để chứng minh
+no-data-loss end-to-end; mục này vẫn `UNVERIFIED`.
+
+## Kịch bản lab còn cần chạy trên máy đủ tài nguyên
 
 - Dependency: Feast.
 - Loại dependency: tùy chọn trên serving path.
-- Trạng thái live hiện tại: `UNVERIFIED` — cần chạy trên Docker stack thật.
+- Trạng thái live hiện tại: `UNVERIFIED` — cần full stack ổn định.
 - Lý do chọn: minh họa rõ khác biệt giữa health và readiness `degraded` mà không
   xóa dữ liệu nguồn.
 
