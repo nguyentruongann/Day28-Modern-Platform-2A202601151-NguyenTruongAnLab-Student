@@ -6,10 +6,10 @@
 - Mã sinh viên: 2A202601151
 - Hình thức: Cá nhân
 
-## Phần thực hiện và đóng góp
+## Phần thực hiện và đóng góp cá nhân
 
-Tôi thực hiện lần lượt các vai trò ingestion/orchestration, data/ML,
-serving/retrieval và platform/observability. Phần mã sinh viên sở hữu gồm:
+Bài làm cá nhân bao quát lần lượt các vai trò ingestion/orchestration, data/ML,
+serving/retrieval và platform/observability. Phần mã được hoàn thiện gồm:
 
 - IP01/IP10: truyền `idempotency-key` và `traceparent` qua Kafka dưới dạng
   bytes; không phát `traceparent` rỗng.
@@ -53,6 +53,6 @@ suy giảm chất lượng.
 
 ## Cải tiến tiếp theo
 
-Tôi sẽ bổ sung transactional outbox cho API → Kafka, chaos test cho
-Kafka/Airflow/Delta và tự động đối chiếu cùng trace ID giữa Jaeger, Prometheus,
-Delta và MLflow trong evidence bundle.
+Hướng cải tiến tiếp theo là bổ sung transactional outbox cho API → Kafka,
+chaos test cho Kafka/Airflow/Delta và tự động đối chiếu cùng trace ID giữa
+Jaeger, Prometheus, Delta và MLflow trong evidence bundle.
